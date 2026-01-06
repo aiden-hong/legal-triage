@@ -1,0 +1,164 @@
+# Legal Triage Rubric
+# 보수적 분류: 애매하면 무조건 TYPE_1 (법무 검토 필요)
+
+version: "1.0"
+
+# Red Flags - 명시적 트리거 (하나라도 매치되면 TYPE_1)
+red_flags:
+  # 개인정보/프라이버시
+  - code: "PII_COLLECTION"
+    keywords: ["개인정보", "주민등록번호", "여권번호", "신용카드", "생체정보", "위치정보", "건강정보", "personal data", "PII", "biometric"]
+    reason: "개인정보 수집/처리 시 개인정보보호법 검토 필수"
+    severity: "critical"
+
+  - code: "DATA_TRANSFER"
+    keywords: ["해외전송", "국외이전", "cross-border", "overseas transfer", "글로벌"]
+    reason: "개인정보 국외이전 시 별도 법적 요건 존재"
+    severity: "critical"
+
+  - code: "CHILDREN_TARGET"
+    keywords: ["아동", "미성년자", "청소년", "14세 미만", "children", "minor", "kid"]
+    reason: "아동 대상 서비스는 법정대리인 동의 등 추가 요건"
+    severity: "critical"
+
+  # 금융/결제
+  - code: "PAYMENT_HANDLING"
+    keywords: ["결제", "결제대행", "송금", "포인트 환전", "payment", "transaction", "refund", "환불"]
+    reason: "금융 관련 서비스는 전자금융거래법 등 검토 필요"
+    severity: "high"
+
+  - code: "FINANCIAL_PRODUCT"
+    keywords: ["투자", "대출", "보험", "펀드", "investment", "loan", "insurance"]
+    reason: "금융상품은 금융당국 규제 대상"
+    severity: "critical"
+
+  # 의료/건강
+  - code: "MEDICAL_CLAIM"
+    keywords: ["치료", "진단", "의료기기", "질병", "medical", "diagnosis", "cure", "treatment"]
+    reason: "의료 관련 주장은 의료법/약사법 위반 가능"
+    severity: "critical"
+
+  - code: "HEALTH_ADVICE"
+    keywords: ["건강기능식품", "영양제", "다이어트 효과", "supplement"]
+    reason: "건강 관련 효능 표시는 식약처 심의 필요"
+    severity: "high"
+
+  # 광고/마케팅
+  - code: "EXAGGERATED_AD"
+    keywords: ["1등", "최고", "최저가 보장", "100% 효과", "guaranteed", "best in"]
+    reason: "과장/허위 광고는 표시광고법 위반"
+    severity: "high"
+
+  - code: "COMPARATIVE_AD"
+    keywords: ["경쟁사 대비", "타사 제품보다", "compared to", "vs 경쟁"]
+    reason: "비교광고는 공정거래위원회 심사 기준 엄격"
+    severity: "medium"
+
+  - code: "CELEBRITY_ENDORSEMENT"
+    keywords: ["연예인", "인플루언서 협찬", "유명인", "celebrity", "influencer"]
+    reason: "추천/보증 광고 시 공정거래법상 고지 의무"
+    severity: "medium"
+
+  # 법적 책임/리스크
+  - code: "LIABILITY_WAIVER"
+    keywords: ["책임 면제", "면책", "보증하지 않음", "no warranty", "as-is"]
+    reason: "소비자 보호 관련 면책 조항은 무효 가능"
+    severity: "high"
+
+  - code: "AUTOMATIC_RENEWAL"
+    keywords: ["자동갱신", "자동연장", "auto-renewal", "recurring"]
+    reason: "자동갱신 시 사전고지 의무 위반 리스크"
+    severity: "medium"
+
+  - code: "USER_CONTENT_LIABILITY"
+    keywords: ["사용자 생성 콘텐츠", "UGC", "댓글", "리뷰", "user-generated"]
+    reason: "UGC 플랫폼은 명예훼손/저작권 침해 책임 이슈"
+    severity: "medium"
+
+  # 지식재산권
+  - code: "TRADEMARK_RISK"
+    keywords: ["타사 브랜드명", "상표", "로고 사용", "trademark"]
+    reason: "타인 상표 무단 사용 시 상표권 침해"
+    severity: "high"
+
+  - code: "COPYRIGHT_RISK"
+    keywords: ["이미지 크롤링", "콘텐츠 복사", "무단전재", "copyright"]
+    reason: "저작권 침해 가능성 검토 필요"
+    severity: "high"
+
+  # 규제/허가
+  - code: "REGULATED_INDUSTRY"
+    keywords: ["주류", "담배", "총기", "도박", "alcohol", "tobacco", "gambling", "betting"]
+    reason: "규제 산업은 별도 인허가 필요"
+    severity: "critical"
+
+  - code: "AGE_RESTRICTION"
+    keywords: ["성인용", "19금", "adult-only", "age-restricted"]
+    reason: "연령 제한 콘텐츠는 청소년보호법 검토 필요"
+    severity: "high"
+
+  # 대외 커뮤니케이션
+  - code: "PRESS_RELEASE"
+    keywords: ["보도자료", "기자간담회", "공식발표", "press release"]
+    reason: "대외 공식 발표는 법무 검토 필수"
+    severity: "high"
+
+  - code: "LEGAL_STATEMENT"
+    keywords: ["법적 조치", "소송", "고소", "legal action", "lawsuit"]
+    reason: "법적 행동 언급 시 법무 사전 검토 필수"
+    severity: "critical"
+
+# 질문 템플릿 - 정보 부족 시 추가 확인
+question_templates:
+  - category: "exposure"
+    question: "서비스/기능의 노출 범위는 어디까지인가요?"
+    options: ["전체 공개", "회원 전용", "특정 그룹", "내부 테스트"]
+    trigger_if_unknown: true
+
+  - category: "data_usage"
+    question: "사용자 데이터를 수집/처리하나요? (예: 이름, 이메일, 행동 로그)"
+    options: ["수집함", "수집하지 않음", "불명확"]
+    trigger_if_unknown: true
+
+  - category: "revenue_model"
+    question: "수익 모델은 무엇인가요?"
+    options: ["무료", "유료(일회성)", "구독", "광고", "커미션"]
+    trigger_if_contains: ["결제", "payment", "subscription"]
+
+  - category: "external_communication"
+    question: "대외적으로 공개/발표하는 내용인가요?"
+    options: ["예 - 고객 대상", "예 - 언론/미디어", "아니오 - 내부용"]
+    trigger_if_unknown: true
+
+  - category: "third_party"
+    question: "제3자(파트너사, 외부 업체) 데이터/서비스를 사용하나요?"
+    options: ["사용함", "사용하지 않음"]
+    trigger_if_unknown: false
+
+  - category: "cross_border"
+    question: "해외 사용자를 타겟으로 하거나 해외 서버를 사용하나요?"
+    options: ["국내 전용", "해외 포함", "불명확"]
+    trigger_if_contains: ["global", "해외", "international"]
+
+# 가드레일 문구 - TYPE_2로 라우팅되어도 포함해야 할 최소 조건
+safe_guardrails:
+  - condition: "data_collection"
+    text: "개인정보 수집 시 이용자 동의를 받고 개인정보처리방침에 명시해야 합니다."
+
+  - condition: "marketing"
+    text: "광고성 정보 전송 시 사전 동의를 받고 수신거부 방법을 명시해야 합니다."
+
+  - condition: "user_content"
+    text: "사용자 생성 콘텐츠는 신고/차단 기능을 제공하고 불법 콘텐츠를 모니터링해야 합니다."
+
+  - condition: "terms_update"
+    text: "서비스 약관 변경 시 사전 공지 기간(최소 7일)을 준수해야 합니다."
+
+  - condition: "refund"
+    text: "유료 서비스는 환불 정책을 명확히 안내하고 소비자 보호 규정을 준수해야 합니다."
+
+# 라우팅 기본 정책
+routing_policy:
+  default: "TYPE_1"  # 불명확한 경우 기본값
+  confidence_threshold: 0.7  # 신뢰도 0.7 미만이면 TYPE_1
+  missing_info_action: "TYPE_1"  # 필수 정보 누락 시 TYPE_1

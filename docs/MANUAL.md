@@ -93,7 +93,7 @@ claude --version
 
 **방법 1: Git 사용 (권장)**
 ```bash
-git clone https://github.com/your-org/legal-triage.git
+git clone https://github.com/aiden-hong/legal-triage.git
 cd legal-triage
 ```
 
@@ -522,7 +522,7 @@ claude           # Claude Code 실행
 
 ### 9.6 추가 도움이 필요하면
 
-1. 이슈 등록: https://github.com/your-org/legal-triage/issues
+1. 이슈 등록: https://github.com/aiden-hong/legal-triage/issues
 2. 슬랙 채널: #legal-triage-support
 3. 담당자: 법무팀 or 개발팀
 

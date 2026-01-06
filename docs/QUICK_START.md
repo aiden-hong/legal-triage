@@ -10,7 +10,7 @@ node --version  # v20 이상
 npm install -g @anthropic-ai/claude-code
 
 # 3. 프로젝트 클론 및 설치
-git clone https://github.com/your-org/legal-triage.git
+git clone https://github.com/aiden-hong/legal-triage.git
 cd legal-triage
 npm install
 

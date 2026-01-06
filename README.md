@@ -2,6 +2,17 @@
 
 프로덕트 아이디어, 기능, 캠페인에 대한 보수적 법무 리스크 트리아지 시스템
 
+> **강남언니 (미용의료 플랫폼) 특화 버전**
+> 의료광고법, 의료법 기반 리스크 분류
+
+## 문서
+
+| 문서 | 설명 |
+|------|------|
+| [Quick Start](docs/QUICK_START.md) | 5분 안에 시작하기 |
+| [사용 매뉴얼](docs/MANUAL.md) | 상세 사용 가이드 |
+| [rubric.yaml](rubric.yaml) | 분류 규칙 정의 |
+
 ## 개요
 
 Legal Triage는 프로덕트 아이디어나 기능이 법무 검토가 필요한지 빠르게 판단하는 CLI 도구입니다. **보수적 원칙**을 따릅니다: 애매하면 무조건 법무 검토(TYPE_1)로 라우팅합니다.
@@ -10,6 +21,7 @@ Legal Triage는 프로덕트 아이디어나 기능이 법무 검토가 필요�
 - **False Negative 최소화**: 불확실하면 항상 TYPE_1(법무 검토)으로 라우팅
 - **법률 자문이 아님**: 리스크 트리아지 도구이며, 법무 판단을 대체하지 않음
 - **감사 추적**: 모든 결정은 근거와 함께 로깅됨
+- **케이스 기반 학습**: 법무 검토 케이스를 축적하여 규칙 개선
 
 ## 설치
 
@@ -183,6 +195,45 @@ legal-triage check -d "팀 내부 일정 관리 도구" -e internal_test -u no_c
 legal-triage quick "버튼 색상을 파란색에서 초록색으로 변경"
 # [TYPE_2] confidence=0.90 flags=none next=PROCEED_WITH_GUARDRAILS
 ```
+
+## Claude Code 슬래시 커맨드
+
+Claude Code에서 사용할 수 있는 커스텀 커맨드:
+
+```bash
+cd legal-triage
+claude
+```
+
+| 커맨드 | 용도 |
+|--------|------|
+| `/legal:triage 내용` | 콘텐츠 분류 (TYPE_1/TYPE_2) |
+| `/legal:case_intake` | 법무 검토 케이스 저장 |
+| `/legal:case_digest 케이스ID` | 케이스에서 규칙 추출 |
+| `/legal:rubric_propose` | Rubric 업데이트 제안 |
+
+## 케이스 관리 스크립트
+
+```bash
+npm run case:ingest         # 케이스 인덱스 생성
+npm run case:extract        # 규칙 후보 추출
+npm run case:anonymize      # 익명화 검증
+npm run case:gen-tests      # 회귀테스트 자동 생성
+npm run rubric:propose-update  # Rubric 업데이트 제안
+```
+
+## 의료광고 Red Flag (v2.0)
+
+| 코드 | 설명 | 법적 근거 |
+|------|------|----------|
+| BEFORE_AFTER_PHOTO | 전후사진 | 의료법 §56②9 |
+| PATIENT_TESTIMONIAL | 환자 후기 | 의료법 §56②7 |
+| EFFECT_GUARANTEE | 효과 보장 | 의료법 §56②1 |
+| COMPARATIVE_SUPERIORITY | 비교우위 | 의료법 §56②2 |
+| CELEBRITY_MEDICAL_ENDORSEMENT | 유명인 추천 | 의료법 §56②8 |
+| PRICE_DISCOUNT_EVENT | 할인/이벤트 | 의료법 §27③ |
+
+전체 목록은 [rubric.yaml](rubric.yaml) 참조
 
 ## 라이선스
 

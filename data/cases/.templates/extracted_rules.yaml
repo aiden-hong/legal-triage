@@ -1,0 +1,41 @@
+# 케이스에서 추출된 규칙 후보
+# 파일명: extracted_rules.yaml
+# 이 파일은 src/cases/extractRules.ts에 의해 자동 생성됩니다.
+# 수동으로 reviewed: true, approved: true로 변경하여 승인할 수 있습니다.
+
+case_id: ""  # 자동 입력
+extracted_at: ""  # ISO 8601
+
+rules:
+  # 예시 1: 새로운 red_flag 키워드 제안
+  - source_case_id: ""
+    type: red_flag
+    proposed_code: "EXISTING_CODE"  # 기존 코드에 키워드 추가 또는 새 코드
+    proposed_keywords:
+      - "새로운 금지 표현"
+    proposed_severity: high  # critical | high | medium | low
+    proposed_reason: "이 표현이 위험한 이유"
+    evidence_quote: "법무 회신에서 근거가 된 원문 (익명화)"
+    confidence: medium  # high | medium | low
+    reviewed: false
+    approved: false
+
+  # 예시 2: 새로운 guardrail 제안
+  - source_case_id: ""
+    type: guardrail
+    proposed_condition: "new_condition_name"
+    proposed_text: "새로운 가드레일 문구"
+    evidence_quote: "법무 회신에서 권고된 문구"
+    confidence: high
+    reviewed: false
+    approved: false
+
+  # 예시 3: 새로운 question 제안
+  - source_case_id: ""
+    type: question
+    proposed_condition: "new_question_category"
+    proposed_text: "새로운 질문 내용?"
+    evidence_quote: "이 질문이 필요했던 맥락"
+    confidence: low
+    reviewed: false
+    approved: false

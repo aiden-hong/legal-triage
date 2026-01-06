@@ -20,7 +20,7 @@ const RUBRIC_PATH = path.join(__dirname, '..', 'rubric.yaml');
 describe('Rubric Loader', () => {
   test('should load rubric.yaml successfully', () => {
     const rubric = loadRubric(RUBRIC_PATH);
-    expect(rubric.version).toBe('1.0');
+    expect(rubric.version).toBe('2.0');
     expect(rubric.red_flags.length).toBeGreaterThan(0);
     expect(rubric.question_templates.length).toBeGreaterThan(0);
     expect(rubric.safe_guardrails.length).toBeGreaterThan(0);
@@ -194,8 +194,8 @@ describe('Triage Engine - Ambiguous Cases (Should Default to TYPE_1)', () => {
 
     const result = engine.triage(input);
 
-    // Medium severity + 대외 커뮤니케이션 = TYPE_1
-    expect(result.red_flags.some((f) => f.code === 'CELEBRITY_ENDORSEMENT')).toBe(true);
+    // 인플루언서/협찬은 CELEBRITY_MEDICAL_ENDORSEMENT로 감지 (critical severity)
+    expect(result.red_flags.some((f) => f.code === 'CELEBRITY_MEDICAL_ENDORSEMENT')).toBe(true);
     expect(result.routing).toBe('TYPE_1');
   });
 });

@@ -1,0 +1,110 @@
+case_id: 2026-01-07_sns-campaign-botox
+extracted_at: '2026-01-06T16:46:39.373Z'
+rules:
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_code: BEFORE_AFTER_PHOTO
+    proposed_keywords:
+      - 전후사진
+    proposed_severity: high
+    proposed_reason: 케이스 2026-01-07_sns-campaign-botox에서 금지된 표현
+    evidence_quote: 'prohibited_expressions: "전후사진"'
+    confidence: medium
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_code: BEFORE_AFTER_PHOTO
+    proposed_keywords:
+      - 비포애프터
+    proposed_severity: high
+    proposed_reason: 케이스 2026-01-07_sns-campaign-botox에서 금지된 표현
+    evidence_quote: 'prohibited_expressions: "비포애프터"'
+    confidence: medium
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_code: BEFORE_AFTER_PHOTO
+    proposed_keywords:
+      - 50% 할인
+    proposed_severity: high
+    proposed_reason: 케이스 2026-01-07_sns-campaign-botox에서 금지된 표현
+    evidence_quote: 'prohibited_expressions: "50% 할인"'
+    confidence: medium
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_code: BEFORE_AFTER_PHOTO
+    proposed_keywords:
+      - 확실한 효과
+    proposed_severity: high
+    proposed_reason: 케이스 2026-01-07_sns-campaign-botox에서 금지된 표현
+    evidence_quote: 'prohibited_expressions: "확실한 효과"'
+    confidence: medium
+    reviewed: false
+    approved: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: guardrail
+    proposed_condition: case_derived_modification
+    proposed_text: '''확실한 효과'' → 삭제 또는 ''개인에 따라 차이가 있을 수 있습니다'' 추가'
+    evidence_quote: 'required_modifications: "''확실한 효과'' → 삭제 또는 ''개인에 따라 차이가 있을 수 있습니다'' 추가"'
+    confidence: medium
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: guardrail
+    proposed_condition: case_derived_modification
+    proposed_text: 전후사진 → 삭제 (심의필 없이 사용 불가)
+    evidence_quote: 'required_modifications: "전후사진 → 삭제 (심의필 없이 사용 불가)"'
+    confidence: medium
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: guardrail
+    proposed_condition: case_derived_modification
+    proposed_text: '''50% 할인'' → 가격 표시 자체는 가능하나, 과도한 할인 강조 제거'
+    evidence_quote: 'required_modifications: "''50% 할인'' → 가격 표시 자체는 가능하나, 과도한 할인 강조 제거"'
+    confidence: medium
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_keywords:
+      - 광고
+    proposed_severity: high
+    proposed_reason: 법무 회신에서 금지된 표현으로 언급
+    evidence_quote: '금지 표현 감지: "광고"'
+    confidence: low
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_keywords:
+      - 유인
+    proposed_severity: high
+    proposed_reason: 법무 회신에서 금지된 표현으로 언급
+    evidence_quote: '금지 표현 감지: "유인"'
+    confidence: low
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_keywords:
+      - 사용
+    proposed_severity: high
+    proposed_reason: 법무 회신에서 금지된 표현으로 언급
+    evidence_quote: '금지 표현 감지: "사용"'
+    confidence: low
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_keywords:
+      - 원칙적으로
+    proposed_severity: high
+    proposed_reason: 법무 회신에서 금지된 표현으로 언급
+    evidence_quote: '금지 표현 감지: "원칙적으로"'
+    confidence: low
+    reviewed: false
+  - source_case_id: 2026-01-07_sns-campaign-botox
+    type: red_flag
+    proposed_keywords:
+      - 보장
+    proposed_severity: high
+    proposed_reason: 법무 회신에서 금지된 표현으로 언급
+    evidence_quote: '금지 표현 감지: "보장"'
+    confidence: low
+    reviewed: false

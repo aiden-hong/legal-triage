@@ -38,6 +38,19 @@ npm link
 
 ## 사용법
 
+### 웹 UI (Streamlit)
+
+```bash
+# Python 의존성 설치
+pip install -r web/requirements.txt
+
+# Streamlit 앱 실행
+cd web
+streamlit run streamlit_app.py
+```
+
+브라우저에서 `http://localhost:8501` 접속
+
 ### 인터랙티브 모드
 
 ```bash
